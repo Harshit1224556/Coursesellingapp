@@ -42,7 +42,8 @@ async function login(req,res)
             message:"Invalid password"
         })
     }
-
+       const token = jwt.sign({id:user._id},process.env.JWTSECRET)
+    res.cookie("token",token)
     return res.status(200).json({
         message:"User Login Successfull"
     })

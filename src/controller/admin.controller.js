@@ -1,7 +1,6 @@
 const adminModel = require('../models/admin.model')
 const bycrypt  = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-
 async function register(req,res){
     const {name,email,password} = req.body
     const isadminexit = await adminModel.findOne({email})
@@ -43,7 +42,9 @@ async function login(req,res)
             message:"Invalid password"
         })
     }
-
+     
+    const token = jwt.sign({id:admin._id},process.env.JWTSECRET)
+    res.cookie("token",token)
     return res.status(200).json({
         message:"Admin Login Successfull"
     })
