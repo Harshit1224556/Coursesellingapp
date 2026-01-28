@@ -56,15 +56,49 @@ async function purchasecourse(req,res)
 
 
 async function seepurchasedcourse(req,res){
-    
+    try{
+
+        const userId = req.user._id
+
+        const user = await userModel.findById(userId)
+        .populate("purchasecourse")
+
+        res.status(200).json({
+            success:true,
+            count:user.purchasecourse.length,
+            course:user.purchasecourse
+
+        })
+    }
+
+    catch(err){
+        message:err.message
+    }
 }
 
 async function seecourse(req,res){
-    return res.json({
-        message:"Welcome to your enrolled courses"
-    })
+   
+    try{
+        const course = await courseModel.find({})
+
+       res.status(200).json({
+         success:true,
+         count:course.length,
+         course
+           
+       })
+    }
+
+    catch(err){
+
+        res.status(404).json({
+        success:false,
+        message:err.message
+        })
+        
+    }
 }
 
 
 
-module.exports = {seecourse,purchasecourse}
+module.exports = {seecourse,purchasecourse,seepurchasedcourse}
