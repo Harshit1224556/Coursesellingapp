@@ -20,4 +20,38 @@ async function createcourse(req,res){
 }
 
 
-module.exports = {createcourse}
+async function deletecourse(req,res){
+     
+
+  try{
+  const {id} = req.params;
+
+  const course = await courseModel.findByIdAndDelete(id)
+
+  if(!course){
+    return res.status(404).json({
+      success:false,
+      message:"course not found"
+    })
+  }
+
+
+  res.status(200).json({
+     success:true,
+    message:"course  deleted successfully"
+  })
+
+}
+catch(err){
+   
+  res.status(500).json({
+    success:false,
+    message:"Server error"
+  })
+}
+  
+
+
+}
+
+module.exports = {createcourse,deletecourse}
