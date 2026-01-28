@@ -6,4 +6,6 @@ const authuser = require('../middleware/auth.middleware')
 router.post("/register",authcontroller.register)
 router.get("/login",authcontroller.login)
 router.get('/showcourse',authuser,usercourse.seecourse)
+
+router.post('/purchasecourse/:courseId',authuser,usercourse.purchasecourse)
 module.exports = router

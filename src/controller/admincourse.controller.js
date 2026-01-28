@@ -53,5 +53,41 @@ catch(err){
 
 
 }
+async function updatecourse(req, res) {
+  try {
+    const { id } = req.params;
+    const { price } = req.body;
 
-module.exports = {createcourse,deletecourse}
+    if (price === undefined || price <= 0) {
+      return res.status(400).json({
+        message: "Invalid price",
+        success: false
+      });
+    }
+
+    const course = await courseModel.findById(id);
+
+    if (!course) {
+      return res.status(404).json({
+        message: "course not found",
+        success: false
+      });
+    }
+
+    course.price = price;
+    await course.save();
+
+    res.status(200).json({
+      message: "course updated successfully",
+      success: true
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      success: false
+    });
+  }
+}
+
+module.exports = {createcourse,deletecourse,updatecourse}
