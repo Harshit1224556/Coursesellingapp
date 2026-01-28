@@ -8,4 +8,6 @@ router.get("/login",authcontroller.login)
 router.get('/showcourse',authuser,usercourse.seecourse)
 
 router.post('/purchasecourse/:courseId',authuser,usercourse.purchasecourse)
+
+router.get('/seepurchasecourse',authuser,usercourse.seepurchasedcourse)
 module.exports = router
