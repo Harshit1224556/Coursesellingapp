@@ -97,7 +97,7 @@ GET	/api/course/all	Public
 GET	/api/course/purchased	User
 ⚙️ Installation & Setup
 1️⃣ Clone the Repository
-git clone https://github.com/your-username/course-selling-app.git
+git clone https://github.com/Harshit1224556/Coursesellingapp
 cd course-selling-app
 
 2️⃣ Install Dependencies
